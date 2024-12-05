@@ -1,0 +1,57 @@
+body {
+  padding-top: 50px; /* 確保內容不被固定的 navbar 遮擋 */
+}
+
+a.is-hoverable {
+    text-decoration: none; /* 預設無底線 */
+    transition: color 0.2s ease, text-decoration 0.2s ease; /* 添加過渡效果 */
+  }
+  
+  a.is-hoverable:hover {
+    text-decoration: underline; /* 懸停時添加底線 */
+    color: #ffcc00; /* 可選：懸停時變金色 */
+  }
+
+  .tab-item.is-warning a {
+    color: #ffdd57; /* Bulma 的 warning 黃色 */
+    font-weight: bold; /* 強調選中項目 */
+    background-color: var(--bulma-tabs-boxed-link-hover-background-color);
+    border-bottom-color: var(--bulma-tabs-boxed-link-hover-border-bottom-color);
+}
+  
+  .tab-item.is-warning a:hover {
+    color: #ffd324; /* hover 時更亮的黃色 */
+  }
+  
+  .transparent-navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background-color: rgba(37, 36, 32, 0.7); /* 半透明背景 */
+    color: #ffffff; /* 白色文字，適配深色背景 */
+    transition: background-color 0.3s ease; /* 平滑過渡效果 */
+  }
+  
+  .transparent-navbar .navbar-item,
+  .transparent-navbar .navbar-link {
+    color: #ffffff; /* 導航項目文字顏色 */
+  }
+  
+
+  .pagination-link.is-current {
+    background-color: #ffd324; /* 自定義背景色 */
+    color: #090a0c; /* 自定義字體顏色 */
+    border-color: #ffd324; /* 自定義邊框顏色 */
+  }
+
+  .pagination-link.is-current:hover {
+    background-color: #ffdd57; /* 懸停時的背景色 */
+    border-color: #ffdd57; /* 懸停時的邊框顏色 */
+  }
+
+  .navbar-item.is-disabled {
+    pointer-events: none;
+    color: #aaa; /* 灰色顯示 */
+    cursor: not-allowed; /* 滑鼠顯示禁用圖標 */
+  }
