@@ -1,28 +1,55 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useParams, Link } from "react-router-dom";
-import announcementsData from "../assets/announcements.json";
-import { Announcements, Announcement } from "../core/models/announcements";
+import { fetchAnnouncements } from "../core/apiservices/announcementsApiService"; // 引入 API 方法
+import { Announcement } from "../core/models/announcements";
 
 const AnnouncementDetails: React.FC = () => {
   const { id } = useParams<{ id: string }>();
-  const announcements: Announcements = announcementsData;
+  const [announcement, setAnnouncement] = useState<Announcement | null>(null);
+  const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
 
-  // 合併所有類型的數據
-  const allAnnouncements: Announcement[] = [
-    ...announcements.latest,
-    ...announcements.news,
-    ...announcements.updates,
-  ];
+  useEffect(() => {
+    const loadAnnouncement = async () => {
+      try {
+        const data = await fetchAnnouncements(); // 獲取所有公告
+        const allAnnouncements = [...data]; // API 返回的數據
+        const foundAnnouncement = allAnnouncements.find(
+          (item) => item.id === id
+        );
 
-  // 查找符合的公告
-  const announcement = allAnnouncements.find((item) => item.id === id);
+        if (foundAnnouncement) {
+          setAnnouncement(foundAnnouncement);
+        } else {
+          setError("找不到對應的公告。");
+        }
+      } catch (err) {
+        console.error(err);
+        setError("無法加載公告，請稍後再試。");
+      } finally {
+        setIsLoading(false);
+      }
+    };
 
-  if (!announcement) {
+    loadAnnouncement();
+  }, [id]);
+
+  if (isLoading) {
+    return (
+      <section className="section">
+        <div className="container">
+          <p>加載中...</p>
+        </div>
+      </section>
+    );
+  }
+
+  if (error) {
     return (
       <section className="section">
         <div className="container">
           <h1 className="title">公告詳情</h1>
-          <p>找不到對應的公告。</p>
+          <p>{error}</p>
           <Link to="/announcements" className="button is-link mt-4">
             返回公告
           </Link>
@@ -35,18 +62,18 @@ const AnnouncementDetails: React.FC = () => {
     <section className="section">
       <div className="container">
         {/* 標題 */}
-        <h1 className="title">{announcement.title}</h1>
+        <h1 className="title">{announcement?.title}</h1>
 
         {/* 發佈時間 - 增加上方間距 */}
         <p className="subtitle is-size-7 has-text-grey mt-2">
-          發佈時間：{announcement.add_date} | 發佈者：{announcement.add_user}
+          發佈時間：{announcement?.add_date} | 發佈者：{announcement?.add_user}
         </p>
 
         <hr />
 
         {/* 公告內容 */}
         <div className="content">
-          <p>{announcement.content}</p>
+          <p>{announcement?.content}</p>
         </div>
 
         <hr />
