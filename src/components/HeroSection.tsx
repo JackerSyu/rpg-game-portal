@@ -44,9 +44,6 @@ const HeroSection: React.FC = () => {
             <Link className="button is-warning is-large m-2" to="/download">
               立即遊玩
             </Link>
-            <a className="button is-light is-large m-2" href="#trailer">
-              觀看宣傳片
-            </a>
           </div>
         </div>
       </div>
