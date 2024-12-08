@@ -6,6 +6,8 @@ import AnnouncementDetails from "./components/AnnouncementDetails";
 import DownloadPage from "./components/DownloadPage";
 import IntroductionPage from "./components/IntroductionPage";
 import ContactPage from "./components/ContactPage";
+import DropSearch from "./components/DropSearch";
+import MagicDolls from "./components/MagicDolls";
 
 const AppRouter: React.FC = () => {
   return (
@@ -19,6 +21,8 @@ const AppRouter: React.FC = () => {
       <Route path="/announcements/:id" element={<AnnouncementDetails />} />
       <Route path="/contact" element={<ContactPage />} />
       <Route path="/download" element={<DownloadPage />} />
+      <Route path="/wiki/drop-search" element={<DropSearch />} />
+      <Route path="/wiki/magic-dolls" element={<MagicDolls />} />
       {/* 定義 404 頁面 */}
       <Route path="*" element={<div>404 - 找不到頁面</div>} />
     </Routes>

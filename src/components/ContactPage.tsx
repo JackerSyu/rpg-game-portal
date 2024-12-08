@@ -60,7 +60,7 @@ const ContactPage: React.FC = () => {
 
         {/* 返回首頁 */}
         <div className="has-text-centered mt-5">
-          <a href="/" className="button is-light">
+          <a href="/" className="button is-warning">
             返回首頁
           </a>
         </div>
