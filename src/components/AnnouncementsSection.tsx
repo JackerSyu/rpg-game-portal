@@ -3,6 +3,7 @@ import { fetchAnnouncements } from "../core/apiservices/announcementsApiService"
 import { Announcements, Announcement } from "../core/models/announcements"; // 導入接口
 import { Link } from "react-router-dom";
 import moment from "moment";
+import Pagination from "../components/Pagination"; // 引入抽象化 Pagination 組件
 
 const AnnouncementsSection: React.FC = () => {
   const [announcements, setAnnouncements] = useState<Announcements>({
@@ -12,7 +13,7 @@ const AnnouncementsSection: React.FC = () => {
   }); // 初始化為空數據
   const [activeTab, setActiveTab] = useState<keyof Announcements>("latest");
   const [currentPage, setCurrentPage] = useState(1);
-  const itemsPerPage = 7;
+  const itemsPerPage = 10;
 
   // 從後端獲取數據
   useEffect(() => {
@@ -31,7 +32,7 @@ const AnnouncementsSection: React.FC = () => {
           { latest: [], news: [], updates: [] }
         );
 
-        // 最新消息（按時間排序，最新 10 條）
+        // 最新消息（按時間排序，最新 100 條）
         groupedData.latest = [...groupedData.news, ...groupedData.updates]
           .sort(
             (a, b) =>
@@ -40,7 +41,6 @@ const AnnouncementsSection: React.FC = () => {
           .slice(0, 100);
 
         setAnnouncements(groupedData);
-        console.log("groupedData", groupedData);
       } catch (error) {
         console.error("Error loading announcements:", error);
       }
@@ -53,18 +53,22 @@ const AnnouncementsSection: React.FC = () => {
   const filteredData: Announcement[] = announcements[activeTab];
 
   const startIndex = (currentPage - 1) * itemsPerPage;
-  const endIndex = startIndex + itemsPerPage;
-  const paginatedData = filteredData.slice(startIndex, endIndex);
+  const paginatedData = filteredData.slice(
+    startIndex,
+    startIndex + itemsPerPage
+  );
   const totalPages = Math.ceil(filteredData.length / itemsPerPage);
 
   const formatDate = (dateString: string): string => {
     return moment(dateString).format("YYYY-MM-DD");
   };
+
   // 檢查是否為近三天的公告
   const isNew = (dateString: string): boolean => {
     const date = moment(dateString);
     return moment().diff(date, "days") <= 3; // 檢查差距是否小於等於3天
   };
+
   return (
     <section
       id="announcements"
@@ -113,8 +117,8 @@ const AnnouncementsSection: React.FC = () => {
             <table className="table is-fullwidth is-hoverable custom-table">
               <thead>
                 <tr>
-                  <th>標題</th>
-                  <th>日期</th>
+                  <th className="has-text-warning">標題</th>
+                  <th className="has-text-warning">日期</th>
                 </tr>
               </thead>
               <tbody>
@@ -125,7 +129,7 @@ const AnnouncementsSection: React.FC = () => {
                         to={`/announcements/${item.id}`}
                         className="has-text-white"
                       >
-                        [{item.type == "updates" ? "更新" : "公告"}]{" "}
+                        [{item.type === "updates" ? "更新" : "公告"}]{" "}
                         {item.title}{" "}
                         {isNew(item.add_date) && (
                           <span className="tag is-warning ml-2">NEW</span>
@@ -140,45 +144,12 @@ const AnnouncementsSection: React.FC = () => {
               </tbody>
             </table>
 
-            {/* Pagination */}
-            <nav
-              className="pagination is-centered mt-4"
-              role="navigation"
-              aria-label="pagination"
-            >
-              <button
-                className="pagination-previous"
-                onClick={() => setCurrentPage((prev) => Math.max(prev - 1, 1))}
-                disabled={currentPage === 1}
-              >
-                上一頁
-              </button>
-              <button
-                className="pagination-next"
-                onClick={() =>
-                  setCurrentPage((prev) => Math.min(prev + 1, totalPages))
-                }
-                disabled={currentPage === totalPages}
-              >
-                下一頁
-              </button>
-              <ul className="pagination-list">
-                {Array.from({ length: totalPages }, (_, i) => i + 1).map(
-                  (page) => (
-                    <li key={page}>
-                      <button
-                        className={`pagination-link ${
-                          page === currentPage ? "is-current" : ""
-                        }`}
-                        onClick={() => setCurrentPage(page)}
-                      >
-                        {page}
-                      </button>
-                    </li>
-                  )
-                )}
-              </ul>
-            </nav>
+            {/* 使用抽象化 Pagination 組件 */}
+            <Pagination
+              currentPage={currentPage}
+              totalPages={totalPages}
+              onPageChange={(page) => setCurrentPage(page)}
+            />
           </div>
         </div>
       </div>

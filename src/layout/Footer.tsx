@@ -13,7 +13,7 @@ const Footer: React.FC = () => {
         <div className="social-links">
           <a
             className="has-text-light has-text-weight-bold is-hoverable"
-            href="https://line.me/ti/p/your-official-line-id" // 替換為你的官方 LINE 連結
+            href="https://lin.ee/mQtkq0P" // 替換為你的官方 LINE 連結
             target="_blank"
             rel="noopener noreferrer"
           >
@@ -21,7 +21,7 @@ const Footer: React.FC = () => {
           </a>
           <a
             className="has-text-light has-text-weight-bold ml-4 is-hoverable"
-            href="https://facebook.com/your-official-facebook-page" // 替換為你的 Facebook 粉絲團連結
+            href="https://www.facebook.com/profile.php?id=61563704583003" // 替換為你的 Facebook 粉絲團連結
             target="_blank"
             rel="noopener noreferrer"
           >

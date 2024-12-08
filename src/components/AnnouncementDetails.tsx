@@ -2,13 +2,16 @@ import React, { useEffect, useState } from "react";
 import { useParams, Link } from "react-router-dom";
 import { fetchAnnouncements } from "../core/apiservices/announcementsApiService"; // 引入 API 方法
 import { Announcement } from "../core/models/announcements";
+import moment from "moment";
 
 const AnnouncementDetails: React.FC = () => {
   const { id } = useParams<{ id: string }>();
   const [announcement, setAnnouncement] = useState<Announcement | null>(null);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
-
+  const formatDate = (dateString: string): string => {
+    return moment(dateString).format("YYYY-MM-DD");
+  };
   useEffect(() => {
     const loadAnnouncement = async () => {
       try {
@@ -66,7 +69,8 @@ const AnnouncementDetails: React.FC = () => {
 
         {/* 發佈時間 - 增加上方間距 */}
         <p className="subtitle is-size-7 has-text-grey mt-2">
-          發佈時間：{announcement?.add_date} | 發佈者：{announcement?.add_user}
+          發佈時間：{formatDate(announcement?.add_date!)} | 發佈者：
+          {announcement?.add_user}
         </p>
 
         <hr />

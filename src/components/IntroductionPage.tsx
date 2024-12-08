@@ -57,9 +57,9 @@ const IntroductionPage: React.FC = () => {
           <table className="table is-fullwidth is-striped">
             <thead>
               <tr>
-                <th>職業</th>
-                <th>最大血量</th>
-                <th>最大魔量</th>
+                <th className="has-text-warning">職業</th>
+                <th className="has-text-warning">最大血量</th>
+                <th className="has-text-warning">最大魔量</th>
               </tr>
             </thead>
             <tbody>
@@ -101,6 +101,12 @@ const IntroductionPage: React.FC = () => {
             </tbody>
           </table>
         </div>
+      </div>
+      {/* 返回按鈕 */}
+      <div className="has-text-centered mt-5">
+        <a href="/" className="button is-warning ">
+          返回首頁
+        </a>
       </div>
     </section>
   );
