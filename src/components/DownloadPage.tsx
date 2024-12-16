@@ -106,7 +106,20 @@ const DownloadPage: React.FC = () => {
             </thead>
             <tbody>
               <tr>
-                <td>補丁打包(全)</td>
+                <td>米克斯補丁_20241215</td>
+                <td>1.0.15</td>
+                <td>2024-12-15</td>
+                <td>
+                  <a
+                    href="/patch/update_20241215.rar"
+                    className="button is-small is-warning"
+                  >
+                    下載
+                  </a>
+                </td>
+              </tr>
+              <tr>
+                <td>補丁_20241109</td>
                 <td>1.0.0</td>
                 <td>2024-12-07</td>
                 <td>
