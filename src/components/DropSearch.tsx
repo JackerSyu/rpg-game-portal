@@ -22,33 +22,45 @@ const DropSearch: React.FC = () => {
     setFilterQuery(""); // 清空篩選條件
   };
 
-  // 表格篩選邏輯
-  const filteredResults = results.filter((result) => {
-    const normalizedFilter = filterQuery.trim().toLowerCase();
-    return (
-      result.npc_name.toLowerCase().includes(normalizedFilter) ||
-      result.locationname.toLowerCase().includes(normalizedFilter) ||
-      result.item.toLowerCase().includes(normalizedFilter)
-    );
-  });
-
-  const totalPages = Math.ceil(filteredResults.length / itemsPerPage);
-
+  // 排序數據
   const handleSort = (column: keyof DropData) => {
-    // 切換排序順序
     const order = column === sortColumn && sortOrder === "asc" ? "desc" : "asc";
     setSortColumn(column);
     setSortOrder(order);
+  };
 
-    // 排序結果
-    const sortedResults = [...filteredResults].sort((a, b) => {
-      if (a[column] < b[column]) return order === "asc" ? -1 : 1;
-      if (a[column] > b[column]) return order === "asc" ? 1 : -1;
+  // 表格篩選和排序邏輯
+  const filteredResults = results
+    .filter((result) => {
+      const normalizedFilter = filterQuery.trim().toLowerCase();
+      return (
+        result.npc_name.toLowerCase().includes(normalizedFilter) ||
+        result.locationname.toLowerCase().includes(normalizedFilter) ||
+        result.item.toLowerCase().includes(normalizedFilter)
+      );
+    })
+    .sort((a, b) => {
+      if (!sortColumn) return 0; // 如果沒有排序列，返回原始順序
+      let aValue = a[sortColumn as keyof DropData]; //明確告訴 TypeScript，sortColumn 的值一定是 DropData 的鍵
+      let bValue = b[sortColumn as keyof DropData];
+
+      if (sortColumn === "chance") {
+        // 如果是百分比字段，提取數字進行排序
+        aValue = parseFloat(String(aValue).replace("%", ""));
+        bValue = parseFloat(String(bValue).replace("%", ""));
+      }
+
+      if (aValue < bValue) return sortOrder === "asc" ? -1 : 1;
+      if (aValue > bValue) return sortOrder === "asc" ? 1 : -1;
       return 0;
     });
 
-    setResults(sortedResults);
-  };
+  // 分頁邏輯
+  const paginatedResults = filteredResults.slice(
+    (currentPage - 1) * itemsPerPage,
+    currentPage * itemsPerPage
+  );
+  const totalPages = Math.ceil(filteredResults.length / itemsPerPage);
 
   return (
     <section className="section">
@@ -149,7 +161,7 @@ const DropSearch: React.FC = () => {
                   className="has-text-warning is-clickable"
                   onClick={() => handleSort("chance")}
                 >
-                  機率 {""}
+                  機率
                   {sortColumn === "chance" && (
                     <span style={{ verticalAlign: "middle" }}>
                       {sortOrder === "asc" ? (
@@ -163,7 +175,7 @@ const DropSearch: React.FC = () => {
               </tr>
             </thead>
             <tbody>
-              {filteredResults.map((result, index) => (
+              {paginatedResults.map((result, index) => (
                 <tr key={`${result.mobId}-${index}`}>
                   <td>{result.npc_name}</td>
                   <td>{result.locationname}</td>
@@ -183,11 +195,6 @@ const DropSearch: React.FC = () => {
             onPageChange={(page) => setCurrentPage(page)}
           />
         )}
-
-        {/* 無結果提示 */}
-        {/* {results.length > 0 && filteredResults.length === 0 && (
-          <p className="notification is-warning">沒有符合條件的結果。</p>
-        )} */}
       </div>
 
       {/* 返回按鈕 */}
