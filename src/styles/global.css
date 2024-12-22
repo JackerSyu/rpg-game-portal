@@ -1,5 +1,101 @@
-body {
-  padding-top: 50px; /* 確保內容不被固定的 navbar 遮擋 */
+/* 頂部導航欄樣式 */
+.navbar {
+  background-color: #141414 !important; /* 設置深色背景 */
+  color: #ffffff !important; /* 設置文字顏色 */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* 添加陰影 */
+  border-bottom: 1px solid #333333; /* 添加下邊框 */
+  display: flex;
+  justify-content: space-between; /* 左右對齊 */
+  align-items: center; /* 垂直居中 */
+  padding: 0 16px; /* 添加左右內邊距 */
+}
+
+/* 主菜單項目樣式 */
+.navbar .ant-menu-horizontal {
+  background: transparent; /* 確保選單背景透明 */
+  border: none; /* 移除邊框 */
+}
+
+/* 主菜單項目文字顏色 */
+.navbar .ant-menu-horizontal > .ant-menu-item {
+  color: #ffffff !important; /* 預設文字顏色 */
+  font-weight: 500;
+}
+
+/* 主菜單項目懸停 */
+.navbar .ant-menu-horizontal > .ant-menu-item:hover {
+  color: #ffcc00 !important;
+  background-color: transparent !important;
+}
+
+/* 主菜單選中樣式 */
+.navbar .ant-menu-horizontal > .ant-menu-item-selected {
+  color: #ffcc00 !important; /* 選中文字顏色 */
+  font-weight: 700;
+  background-color: transparent !important;
+}
+
+/* 子選單樣式 */
+.navbar .ant-menu-horizontal > .ant-menu-submenu {
+  color: #ffffff;
+}
+
+/* 子選單選中標題樣式 */
+.navbar .ant-menu-horizontal > .ant-menu-submenu-selected {
+  color: #ffcc00 !important; /* 子選單選中文字顏色 */
+  font-weight: 700;
+  background-color: transparent !important;
+}
+
+/* 下拉子菜單的樣式 */
+.navbar .ant-dropdown-menu {
+  background-color: #1f1f1f; /* 設置下拉選單背景顏色 */
+  color: #ffffff;
+  border: none;
+}
+
+/* 下拉子菜單項目懸停 */
+.navbar .ant-dropdown-menu-item:hover {
+  background-color: #333333; /* 設置選單項懸停顏色 */
+}
+
+/* 下拉子菜單選中項目 */
+.navbar .ant-dropdown-menu-item-selected {
+  color: #ffcc00 !important;
+  font-weight: 700;
+  background-color: transparent !important;
+}
+
+/* 子菜單展開時箭頭顏色 */
+.navbar .ant-menu-submenu-open .ant-menu-submenu-title > .ant-menu-submenu-arrow {
+  color: #ffcc00 !important; /* 展開箭頭變黃色 */
+}
+
+/* 子菜單項目懸停效果 */
+.navbar .ant-menu-submenu-popup .ant-dropdown-menu-item:hover {
+  color: #ffcc00 !important;
+  background-color: #333333;
+}
+
+/**/
+
+
+/* ant card */
+
+.ant-card-body {
+  --bulma-box-background-color: var(--bulma-scheme-main);
+  --bulma-box-color: var(--bulma-text);
+  --bulma-box-radius: var(--bulma-radius-large);
+  --bulma-box-shadow: var(--bulma-shadow);
+  --bulma-box-padding: 1.25rem;
+  --bulma-box-link-hover-shadow: 0 0.5em 1em -0.125em hsla(var(--bulma-scheme-h), var(--bulma-scheme-s), var(--bulma-scheme-invert-l), 0.1), 0 0 0 1px var(--bulma-link);
+  --bulma-box-link-active-shadow: inset 0 1px 2px hsla(var(--bulma-scheme-h), var(--bulma-scheme-s), var(--bulma-scheme-invert-l), 0.2), 0 0 0 1px var(--bulma-link);
+  background-color: var(--bulma-box-background-color);
+  border-radius: var(--bulma-box-radius);
+  box-shadow: var(--bulma-box-shadow);
+  color: var(--bulma-box-color);
+  display: block;
+  padding: var(--bulma-box-padding);
 }
 
 a.is-hoverable {
@@ -23,22 +119,23 @@ a.is-hoverable {
     color: #ffd324; /* hover 時更亮的黃色 */
   }
   
+  /*
   .transparent-navbar {
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
-    background-color: rgba(37, 36, 32, 0.7); /* 半透明背景 */
-    color: #ffffff; /* 白色文字，適配深色背景 */
-    transition: background-color 0.3s ease; /* 平滑過渡效果 */
+    background-color: rgba(37, 36, 32, 0.7);
+    color: #ffffff; 
+    transition: background-color 0.3s ease;
   }
   
   .transparent-navbar .navbar-item,
   .transparent-navbar .navbar-link {
-    color: #ffffff; /* 導航項目文字顏色 */
+    color: #ffffff; 
   }
   
-
+*/
   .pagination-link.is-current {
     background-color: #ffd324; /* 自定義背景色 */
     color: #090a0c; /* 自定義字體顏色 */

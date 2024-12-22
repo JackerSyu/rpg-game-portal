@@ -25,13 +25,71 @@ const DownloadPage: React.FC = () => {
         <div className="columns is-multiline is-centered mt-5 ">
           <div className="column is-3 has-text-centered ">
             <a
-              href="https://drive.google.com/file/d/1bIzuRnt9zUThV9N81LJJkokn6Wvjv-DE/view"
+              href="https://drive.google.com/file/d/1vW8vzesYPZ_hDaAuCEOQ6ViIWRiv0YdB/view?usp=drive_link"
               target="_blank"
               className="button is-warning is-large  "
             >
               下載 Windows 版本
             </a>
           </div>
+        </div>
+
+        {/* 補丁下載 */}
+        <div className="box mt-5">
+          <h2 className="title is-4">補丁下載</h2>
+          <p>如果您需要更新遊戲版本，請下載以下補丁。</p>
+
+          <table className="table is-fullwidth is-striped mt-3">
+            <thead>
+              <tr>
+                <th className="has-text-warning">補丁名稱</th>
+                <th className="has-text-warning">版本號</th>
+                <th className="has-text-warning">發布日期</th>
+                <th className="has-text-warning">下載</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>T恤無法交易補丁_20241222</td>
+                <td>1.0.16</td>
+                <td>2024-12-22</td>
+                <td>
+                  <a
+                    href="/patch/patch_20241222.rar"
+                    className="button is-small is-warning"
+                  >
+                    下載
+                  </a>
+                </td>
+              </tr>
+              <tr>
+                <td>米克斯補丁_20241215</td>
+                <td>1.0.15</td>
+                <td>2024-12-15</td>
+                <td>
+                  <a
+                    href="/patch/update_20241215.rar"
+                    className="button is-small is-warning"
+                  >
+                    下載
+                  </a>
+                </td>
+              </tr>
+              <tr>
+                <td>米克斯補丁_20241109</td>
+                <td>1.0.0</td>
+                <td>2024-12-07</td>
+                <td>
+                  <a
+                    href="/patch/update_all_20241208.rar"
+                    className="button is-small is-warning"
+                  >
+                    下載
+                  </a>
+                </td>
+              </tr>
+            </tbody>
+          </table>
         </div>
 
         {/* 系統需求 */}
@@ -90,50 +148,6 @@ const DownloadPage: React.FC = () => {
           </ol>
         </div>
 
-        {/* 補丁下載 */}
-        <div className="box mt-5">
-          <h2 className="title is-4">補丁下載</h2>
-          <p>如果您需要更新遊戲版本，請下載以下補丁。</p>
-
-          <table className="table is-fullwidth is-striped mt-3">
-            <thead>
-              <tr>
-                <th className="has-text-warning">補丁名稱</th>
-                <th className="has-text-warning">版本號</th>
-                <th className="has-text-warning">發布日期</th>
-                <th className="has-text-warning">下載</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>米克斯補丁_20241215</td>
-                <td>1.0.15</td>
-                <td>2024-12-15</td>
-                <td>
-                  <a
-                    href="/patch/update_20241215.rar"
-                    className="button is-small is-warning"
-                  >
-                    下載
-                  </a>
-                </td>
-              </tr>
-              <tr>
-                <td>補丁_20241109</td>
-                <td>1.0.0</td>
-                <td>2024-12-07</td>
-                <td>
-                  <a
-                    href="/patch/update_all.rar"
-                    className="button is-small is-warning"
-                  >
-                    下載
-                  </a>
-                </td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
         {/* 常見問題 */}
         <div className="box mt-5" id="faq">
           <h2 className="title is-4">常見問題</h2>

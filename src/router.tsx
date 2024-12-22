@@ -8,6 +8,12 @@ import IntroductionPage from "./components/IntroductionPage";
 import ContactPage from "./components/ContactPage";
 import DropSearch from "./components/DropSearch";
 import MagicDolls from "./components/MagicDolls";
+import ManaMission from "./components/ManaMission";
+import MashuMission from "./components/MashuMission";
+import DailyMission from "./components/DailyMission";
+import AdvertisingReward from "./components/AdvertisingReward";
+import Disclaimer from "./components/Disclaimer";
+import ChristmasEvent from "./components/ChristmasEvent";
 
 const AppRouter: React.FC = () => {
   return (
@@ -23,6 +29,12 @@ const AppRouter: React.FC = () => {
       <Route path="/download" element={<DownloadPage />} />
       <Route path="/wiki/drop-search" element={<DropSearch />} />
       <Route path="/wiki/magic-dolls" element={<MagicDolls />} />
+      <Route path="/guide/missions/mana" element={<ManaMission />} />
+      <Route path="/guide/missions/mashu" element={<MashuMission />} />
+      <Route path="/guide/missions/daily" element={<DailyMission />} />
+      <Route path="/guide/advertising" element={<AdvertisingReward />} />
+      <Route path="/disclaimer" element={<Disclaimer />} />
+      <Route path="/event/christmas" element={<ChristmasEvent />} />
       {/* 定義 404 頁面 */}
       <Route path="*" element={<div>404 - 找不到頁面</div>} />
     </Routes>
