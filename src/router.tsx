@@ -14,6 +14,8 @@ import DailyMission from "./components/DailyMission";
 import AdvertisingReward from "./components/AdvertisingReward";
 import Disclaimer from "./components/Disclaimer";
 import ChristmasEvent from "./components/ChristmasEvent";
+import PlayerGuidelines from "./components/PlayerGuidelines";
+import BeginnerGuide from "./components/BeginnerGuide";
 
 const AppRouter: React.FC = () => {
   return (
@@ -33,8 +35,10 @@ const AppRouter: React.FC = () => {
       <Route path="/guide/missions/mashu" element={<MashuMission />} />
       <Route path="/guide/missions/daily" element={<DailyMission />} />
       <Route path="/guide/advertising" element={<AdvertisingReward />} />
+      <Route path="/guide/beginner" element={<BeginnerGuide />} />;
       <Route path="/disclaimer" element={<Disclaimer />} />
       <Route path="/event/christmas" element={<ChristmasEvent />} />
+      <Route path="/player-guidelines" element={<PlayerGuidelines />} />
       {/* 定義 404 頁面 */}
       <Route path="*" element={<div>404 - 找不到頁面</div>} />
     </Routes>

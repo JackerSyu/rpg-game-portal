@@ -16,6 +16,14 @@ const Navbar: React.FC = () => {
       label: "遊戲指引",
       children: [
         {
+          key: "guide-beginner",
+          label: <Link to="/guide/beginner">新手教學</Link>,
+        },
+        {
+          key: "guide-advertising",
+          label: <Link to="/guide/advertising">推文獎勵</Link>,
+        },
+        {
           key: "guide-missions",
           label: "特殊任務",
           children: [
@@ -46,10 +54,6 @@ const Navbar: React.FC = () => {
             // 可以在此新增其他活動
           ],
         },
-        {
-          key: "guide-advertising",
-          label: <Link to="/guide/advertising">推文獎勵</Link>,
-        },
       ],
     },
     {
@@ -69,6 +73,10 @@ const Navbar: React.FC = () => {
     { key: "community", label: "社群", disabled: true },
     { key: "contact", label: <Link to="/contact">客服中心</Link> },
     { key: "download", label: <Link to="/download">遊戲下載</Link> },
+    {
+      key: "player-guidelines",
+      label: <Link to="/player-guidelines">玩家須知</Link>,
+    },
     { key: "disclaimer", label: <Link to="/disclaimer">免責聲明</Link> },
   ];
 
