@@ -1,7 +1,7 @@
 import React, { useState } from "react";
-import { dropSearchApiService } from "../core/apiservices/dropSearchApiService";
-import { DropData } from "../core/models/dropData";
-import Pagination from "../components/Pagination";
+import { dropSearchApiService } from "../../core/apiservices/dropSearchApiService";
+import { DropData } from "../../core/models/dropData";
+import Pagination from "../Pagination";
 import ArrowUpwardIcon from "@mui/icons-material/ArrowUpward";
 import ArrowDownwardIcon from "@mui/icons-material/ArrowDownward";
 

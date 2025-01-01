@@ -8,7 +8,7 @@ const DailyMission: React.FC = () => {
   const dailyBoxItems = [
     { key: "1", item: "骷髏聖盃" },
     { key: "2", item: "勝利的徽章" },
-    { key: "3", item: "經驗藥水130% (20)" },
+    { key: "3", item: "經驗藥水130% (2)" },
     { key: "4", item: "精靈餅乾 (20)" },
     { key: "5", item: "勇敢藥水 (20)" },
     { key: "6", item: "藍色藥水 (20)" },

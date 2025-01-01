@@ -34,7 +34,7 @@ const MagicDolls: React.FC = () => {
     {
       key: "3",
       image: "/images/magic_doll/yeti.jpg",
-      name: "魔法娃娃：雪怪",
+      name: "雪怪",
       crystalCost: "50",
       description: (
         <>
