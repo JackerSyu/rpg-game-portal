@@ -1,6 +1,6 @@
 import React from "react";
-import HeroSection from "./components/HeroSection";
-import AnnouncementsSection from "./components/AnnouncementsSection";
+import HeroSection from "./components/home/HeroSection";
+import AnnouncementsSection from "./components/announcement/AnnouncementsSection";
 
 const Home: React.FC = () => {
   return (

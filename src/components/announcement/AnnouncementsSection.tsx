@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from "react";
-import { fetchAnnouncements } from "../core/apiservices/announcementsApiService"; // 引入 API 方法
-import { Announcements, Announcement } from "../core/models/announcements"; // 導入接口
+import { fetchAnnouncements } from "../../core/apiservices/announcementsApiService"; // 引入 API 方法
+import { Announcements, Announcement } from "../../core/models/announcements"; // 導入接口
 import { Link } from "react-router-dom";
 import moment from "moment";
-import Pagination from "../components/Pagination"; // 引入抽象化 Pagination 組件
+import Pagination from "../Pagination"; // 引入抽象化 Pagination 組件
 
 const AnnouncementsSection: React.FC = () => {
   const [announcements, setAnnouncements] = useState<Announcements>({

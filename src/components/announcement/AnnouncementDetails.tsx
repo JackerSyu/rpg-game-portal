@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useParams, Link } from "react-router-dom";
-import { fetchAnnouncements } from "../core/apiservices/announcementsApiService"; // 引入 API 方法
-import { Announcement } from "../core/models/announcements";
+import { fetchAnnouncements } from "../../core/apiservices/announcementsApiService"; // 引入 API 方法
+import { Announcement } from "../../core/models/announcements";
 import moment from "moment";
 
 const AnnouncementDetails: React.FC = () => {
