@@ -20,6 +20,14 @@ import Register from "./components/account/Register";
 import Login from "./components/account/Login";
 import ForgotPassword from "./components/account/ForgotPassword";
 import ChangePassword from "./components/account/ChangePassword";
+import ForumPostDetail from "./components/forum/ForumPostDetail";
+// 論壇相關頁面
+import ForumHome from "./components/forum/ForumHome";
+import PublishPost from "./components/forum/PublishPost";
+// import ForumPostDetail from "./components/forum/ForumPostDetail"; // 假設有貼文詳情頁
+// import PostDetails from "./components/forum/PostDetails";
+// import PostReply from "./components/forum/PostReply";
+// import ReplyEdit from "./components/forum/ReplyEdit";
 
 const AppRouter: React.FC = () => {
   return (
@@ -33,7 +41,6 @@ const AppRouter: React.FC = () => {
       <Route path="/intro" element={<IntroductionPage />} />
       {/* 定義公告頁面的路由 */}
       <Route path="/announcements" element={<Announcements />} />
-      {/* 動態路由 */}
       <Route path="/announcements/:id" element={<AnnouncementDetails />} />
       <Route path="/contact" element={<ContactPage />} />
       <Route path="/download" element={<DownloadPage />} />
@@ -43,10 +50,20 @@ const AppRouter: React.FC = () => {
       <Route path="/guide/missions/mashu" element={<MashuMission />} />
       <Route path="/guide/missions/daily" element={<DailyMission />} />
       <Route path="/guide/advertising" element={<AdvertisingReward />} />
-      <Route path="/guide/beginner" element={<BeginnerGuide />} />;
+      <Route path="/guide/beginner" element={<BeginnerGuide />} />
       <Route path="/disclaimer" element={<Disclaimer />} />
       <Route path="/event/christmas" element={<ChristmasEvent />} />
       <Route path="/player-guidelines" element={<PlayerGuidelines />} />
+
+      {/* 新增論壇相關路由 */}
+      <Route path="/forum" element={<ForumHome />} />
+      <Route path="/forum/new" element={<PublishPost />} />
+      <Route path="/forum-posts/:id" element={<ForumPostDetail />} />
+      {/* <Route path="/forum-posts/:id" element={<ForumPostDetail />} /> */}
+      {/* // <Route path="/forum/:id" element={<PostDetails />} />
+      // <Route path="/forum/:id/reply" element={<PostReply />} />
+      // <Route path="/forum/reply/:id/edit" element={<ReplyEdit />} />  */}
+
       {/* 定義 404 頁面 */}
       <Route path="*" element={<div>404 - 找不到頁面</div>} />
     </Routes>

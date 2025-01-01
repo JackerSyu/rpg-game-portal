@@ -1,7 +1,7 @@
 import React from "react";
 import { Menu, Dropdown, Button, Grid, Avatar, notification } from "antd";
 import { ConfigProvider, theme } from "antd";
-import { Link, useNavigate, useLocation } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { MenuOutlined } from "@ant-design/icons";
 import { useAuth } from "../contexts/AuthContext";
 
@@ -82,7 +82,7 @@ const Navbar: React.FC = () => {
         },
       ],
     },
-    { key: "community", label: "社群", disabled: true },
+    { key: "forum", label: <Link to="/forum">論壇</Link> }, // 論壇直接連結
     { key: "contact", label: <Link to="/contact">客服中心</Link> },
     { key: "download", label: <Link to="/download">遊戲下載</Link> },
     {
@@ -163,11 +163,7 @@ const Navbar: React.FC = () => {
                           key: "change-password",
                           label: <Link to="/change-password">密碼變更</Link>,
                         },
-                        {
-                          key: "logout",
-                          label: "登出",
-                          onClick: handleLogout,
-                        },
+                        { key: "logout", label: "登出", onClick: handleLogout },
                       ]),
                 ],
               }}
