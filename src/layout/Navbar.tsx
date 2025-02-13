@@ -64,6 +64,10 @@ const Navbar: React.FC = () => {
               key: "guide-events-christmas",
               label: <Link to="/event/christmas">聖誕節活動</Link>,
             },
+            {
+              key: "guide-events-newyear",
+              label: <Link to="/event/newyear">農曆新年活動</Link>,
+            },
           ],
         },
       ],
@@ -82,7 +86,7 @@ const Navbar: React.FC = () => {
         },
       ],
     },
-    { key: "forum", label: <Link to="/forum">論壇</Link> }, // 論壇直接連結
+    { key: "forum", label: "討論區", disabled: true }, // 設為討論區並禁用
     { key: "contact", label: <Link to="/contact">客服中心</Link> },
     { key: "download", label: <Link to="/download">遊戲下載</Link> },
     {
@@ -92,6 +96,7 @@ const Navbar: React.FC = () => {
     { key: "disclaimer", label: <Link to="/disclaimer">免責聲明</Link> },
   ];
 
+  // @ts-ignore: 忽略未使用變數的警告
   const dropdownMenu = <Menu items={menuItems} />;
 
   const userMenu = {
@@ -125,24 +130,17 @@ const Navbar: React.FC = () => {
           <div className="navbar-menu">
             <Menu mode="horizontal" theme="dark" items={menuItems} />
             {/* 顯示登入/登出區塊 */}
-            {isAuthenticated ? (
-              <div className="navbar-end is-flex is-align-items-center">
-                <Dropdown menu={userMenu} className="ml-4">
-                  <Avatar style={{ backgroundColor: "#87d068" }}>
-                    {currentUser?.characterId[0].toUpperCase()}
-                  </Avatar>
-                </Dropdown>
-              </div>
-            ) : (
-              <div className="navbar-end">
-                <Link to="/login" className="button is-dark">
-                  登入
-                </Link>
-                <Link to="/register" className="button is-dark ml-2">
-                  註冊
-                </Link>
-              </div>
-            )}
+            {
+              isAuthenticated ? (
+                <div className="navbar-end is-flex is-align-items-center">
+                  <Dropdown menu={userMenu} className="ml-4">
+                    <Avatar style={{ backgroundColor: "#87d068" }}>
+                      {currentUser?.characterId[0].toUpperCase()}
+                    </Avatar>
+                  </Dropdown>
+                </div>
+              ) : null /* 隱藏登入/註冊按鈕 */
+            }
           </div>
         ) : (
           <div className="navbar-dropdown">
@@ -151,13 +149,7 @@ const Navbar: React.FC = () => {
                 items: [
                   ...menuItems,
                   ...(!isAuthenticated
-                    ? [
-                        { key: "login", label: <Link to="/login">登入</Link> },
-                        {
-                          key: "register",
-                          label: <Link to="/register">註冊</Link>,
-                        },
-                      ]
+                    ? []
                     : [
                         {
                           key: "change-password",

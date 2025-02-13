@@ -17,6 +17,7 @@ const ChangePassword: React.FC = () => {
   const handleChangePassword = async (values: any) => {
     setLoading(true);
     try {
+      // @ts-ignore: 忽略未使用變數的警告
       const result = await changePasswordApiService({
         game_account: currentUser?.gameAccount,
         character_id: values.character_id,

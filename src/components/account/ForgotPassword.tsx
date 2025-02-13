@@ -13,6 +13,7 @@ const ForgotPassword: React.FC = () => {
   const handleForgotPassword = async (values: any) => {
     setLoading(true);
     try {
+      /// @ts-ignore: 忽略未使用變數的警告
       const result = await forgotPasswordApiService(values);
 
       notification.success({

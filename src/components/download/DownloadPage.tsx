@@ -25,7 +25,7 @@ const DownloadPage: React.FC = () => {
         <div className="columns is-multiline is-centered mt-5 ">
           <div className="column is-3 has-text-centered ">
             <a
-              href="https://drive.google.com/file/d/1vW8vzesYPZ_hDaAuCEOQ6ViIWRiv0YdB/view?usp=drive_link"
+              href="https://drive.google.com/file/d/1sMkndB4US0mofCMckIqiDONyyprC94G3/view?usp=sharing"
               target="_blank"
               className="button is-warning is-large  "
             >
@@ -49,6 +49,47 @@ const DownloadPage: React.FC = () => {
               </tr>
             </thead>
             <tbody>
+              <tr>
+                <td>新登入器下載_20250213(修正無法雙開問題)</td>
+                <td>1.0.19</td>
+                <td>2025-02-13</td>
+                <td>
+                  <a
+                    href="https://drive.google.com/file/d/1zJFd0vKTNEez36PJePUaiGvNZocIFNiR/view?usp=drive_link"
+                    className="button is-small is-warning"
+                  >
+                    下載
+                  </a>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <s>新登入器下載_20250212</s>(請下載20250213版本)
+                </td>
+                <td>1.0.18</td>
+                <td>2025-02-12</td>
+                <td>
+                  <a
+                    // href="https://drive.google.com/file/d/1CJkYvxGd_8rv9UnSb67sWjSRDESnQv6k/view?usp=drive_link"
+                    className="button is-small is-warning"
+                  >
+                    下載
+                  </a>
+                </td>
+              </tr>
+              <tr>
+                <td>補丁_20250112</td>
+                <td>1.0.17</td>
+                <td>2025-01-12</td>
+                <td>
+                  <a
+                    href="/patch/米克斯補丁_20250112.rar"
+                    className="button is-small is-warning"
+                  >
+                    下載
+                  </a>
+                </td>
+              </tr>
               <tr>
                 <td>T恤無法交易補丁_20241222</td>
                 <td>1.0.16</td>

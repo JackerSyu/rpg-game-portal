@@ -13,7 +13,7 @@ const PlayerGuidelines: React.FC = () => {
         </Title>
 
         {/* 封鎖帳號標準 */}
-        <Title level={4}>封鎖帳號（自動練功）標準</Title>
+        <Title level={4}>封鎖帳號標準</Title>
         <Paragraph>
           <Text>-</Text>{" "}
           不定時巡邏驗證，只要是在有怪物的地圖有「攻擊怪物」的動作，就會進行驗證。
@@ -23,13 +23,33 @@ const PlayerGuidelines: React.FC = () => {
           ，並且繼續攻擊怪物，即構成「掛機之疑慮」進行封鎖。
         </Paragraph>
         <Paragraph>
+          <Text>-</Text>{" "}
+          <Text type="danger">
+            當GM現身驗證時，請勿離開畫面，我只會發送一次驗證問題，因瞬移/回卷，沒看到指定驗證問題而1分鐘內沒回答者視同掛機。
+          </Text>
+        </Paragraph>
+        <Paragraph>
           <Text>-</Text> 任何形式的{" "}
-          <Text strong>自動練功（定時施放技能:火風暴、反屏等）</Text>
+          <Text type="danger">自動練功（定時施放技能:火風暴、反屏等）</Text>
           ，只要是驗證沒回應，即構成「掛機之疑慮」。
+        </Paragraph>
+        <Paragraph>
+          <Text>-</Text>{" "}
+          <Text strong>
+            任何玩家皆有檢舉的權利，若是其他玩家白頻/密語/公頻問話，請表示一下人在。
+          </Text>
         </Paragraph>
         <Paragraph>
           <Text>-</Text> 不接受請小孩幫忙代練、不會回覆 GM
           問答、不會打字等奇葩理由。
+        </Paragraph>
+
+        <Paragraph>
+          <Text>-</Text>
+          <Text strong>
+            {" "}
+            疑似非法程序進行遊戲: 包含穿牆/穿人/加速/自動練功/錯位BUG
+          </Text>
         </Paragraph>
 
         {/* 總結 */}

@@ -1,7 +1,17 @@
-import React, { useState, useEffect } from "react";
-import { Form, Input, Button, Select, message, Spin, Checkbox } from "antd";
-import ReactQuill from "react-quill";
-import "react-quill/dist/quill.snow.css";
+import React, { useEffect, useRef, useState } from "react";
+import {
+  Form,
+  Input,
+  Button,
+  Select,
+  message,
+  Spin,
+  Checkbox,
+  Modal,
+  Radio,
+} from "antd";
+import Quill from "quill";
+import "quill/dist/quill.snow.css";
 import {
   createForumPost,
   NewPost,
@@ -10,25 +20,30 @@ import {
   fetchForumCategories,
   ForumCategory,
 } from "../../core/apiservices/forumCategoriesApiService";
-import { useAuth } from "../../contexts/AuthContext"; // AuthContext
-import { useNavigate } from "react-router-dom"; // 用於重定向
+import { useAuth } from "../../contexts/AuthContext";
+import { useNavigate } from "react-router-dom";
 
 const { Option } = Select;
 
 const PublishPost: React.FC = () => {
+  const quillRef = useRef<Quill | null>(null); // Quill 實例
+  const editorContainerRef = useRef<HTMLDivElement>(null); // 編輯器容器
   const [categories, setCategories] = useState<ForumCategory[]>([]);
   const [loading, setLoading] = useState(false);
-  const [content, setContent] = useState<string>(""); // 富文本內容
-  const [isAnonymous, setIsAnonymous] = useState<boolean>(false); // 匿名選項
+  const [isAnonymous, setIsAnonymous] = useState(false);
 
-  const { currentUser, isAuthenticated } = useAuth(); // 獲取當前用戶及登入狀態
-  const navigate = useNavigate(); // 用於導航
+  const { currentUser, isAuthenticated } = useAuth();
+  const navigate = useNavigate();
+
+  const [imageModalVisible, setImageModalVisible] = useState(false);
+  const [imageUrl, setImageUrl] = useState("");
+  const [imageSize, setImageSize] = useState("medium"); // 預設圖片大小
 
   // 檢查登入狀態
   useEffect(() => {
     if (!isAuthenticated) {
       message.error("您必須登入才能發佈貼文！");
-      navigate("/login"); // 重定向到登入頁面
+      navigate("/login");
     }
   }, [isAuthenticated, navigate]);
 
@@ -41,27 +56,115 @@ const PublishPost: React.FC = () => {
       .finally(() => setLoading(false));
   }, []);
 
+  // 初始化 Quill 編輯器
+  useEffect(() => {
+    if (!editorContainerRef.current || quillRef.current) return; // 防止多次初始化
+
+    // 初始化 Quill
+    const quill = new Quill(editorContainerRef.current, {
+      theme: "snow",
+      modules: {
+        toolbar: {
+          container: [
+            ["bold", "italic", "underline", "blockquote"],
+            [{ list: "ordered" }, { list: "bullet" }],
+            ["link", "image"],
+            ["clean"],
+          ],
+          handlers: {
+            image: () => setImageModalVisible(true), // 顯示圖片插入對話框
+          },
+        },
+      },
+      placeholder: "輸入貼文內容...",
+    });
+
+    quillRef.current = quill;
+  }, []);
+
+  // 確認插入圖片
+  const handleInsertImage = () => {
+    if (!imageUrl) {
+      message.error("請輸入圖片網址！");
+      return;
+    }
+
+    const quill = quillRef.current;
+    if (quill) {
+      const range = quill.getSelection();
+      quill.insertEmbed(range?.index || 0, "image", imageUrl);
+
+      // 延遲操作，設置圖片大小
+      setTimeout(() => {
+        const editor = quill.root;
+        const imgs = editor.querySelectorAll("img");
+        if (imgs.length > 0) {
+          const img = imgs[imgs.length - 1] as HTMLImageElement;
+          switch (imageSize) {
+            case "large":
+              img.style.width = "800px";
+              img.style.height = "auto";
+              break;
+            case "medium":
+              img.style.width = "500px";
+              img.style.height = "auto";
+              break;
+            case "small":
+              img.style.width = "300px";
+              img.style.height = "auto";
+              break;
+            case "custom":
+              const customWidth = prompt(
+                "請輸入自定義寬度（例如 400px）：",
+                "400px"
+              );
+              const customHeight = prompt(
+                "請輸入自定義高度（例如 auto 或 300px）：",
+                "auto"
+              );
+              if (customWidth) img.style.width = customWidth;
+              if (customHeight) img.style.height = customHeight;
+              break;
+            default:
+              break;
+          }
+        }
+      }, 100);
+    }
+
+    setImageModalVisible(false); // 關閉對話框
+    setImageUrl(""); // 清空圖片網址
+  };
+
   // 表單提交處理
   const handleSubmit = async (values: { title: string; category: number }) => {
-    if (!content.trim()) {
+    const quill = quillRef.current;
+    if (!quill) {
+      message.error("編輯器未初始化");
+      return;
+    }
+
+    const content = quill.root.innerHTML; // 獲取編輯器內容
+    if (!quill.getText().trim()) {
       message.error("內容不能為空");
       return;
     }
+
     setLoading(true);
 
     const newPost: NewPost = {
       title: values.title,
       content,
       category_id: values.category,
-      author_account: currentUser?.gameAccount || "anonymous", // 默認為匿名
+      author_account: currentUser?.gameAccount || "anonymous",
       is_anonymous: isAnonymous,
     };
 
     try {
       await createForumPost(newPost);
       message.success("貼文發佈成功！");
-      setContent(""); // 清空富文本編輯器
-      navigate("/forum"); // 發佈成功後跳轉到論壇主頁
+      quill.root.innerHTML = ""; // 清空編輯器
+      navigate("/forum");
     } catch (error) {
       message.error("貼文發佈失敗，請稍後再試！");
     } finally {
@@ -97,11 +200,13 @@ const PublishPost: React.FC = () => {
           </Form.Item>
 
           <Form.Item label="內容">
-            <ReactQuill
-              theme="snow"
-              value={content}
-              onChange={setContent}
-              placeholder="輸入貼文內容..."
+            <div
+              ref={editorContainerRef}
+              style={{
+                border: "1px solid #ddd",
+                borderRadius: "4px",
+                minHeight: "200px",
+              }}
             />
           </Form.Item>
 
@@ -121,6 +226,36 @@ const PublishPost: React.FC = () => {
           </Form.Item>
         </Form>
       </Spin>
+
+      {/* 插入圖片對話框 */}
+      <Modal
+        title="插入圖片"
+        visible={imageModalVisible}
+        onCancel={() => setImageModalVisible(false)}
+        onOk={handleInsertImage}
+      >
+        <Form layout="vertical">
+          <Form.Item label="圖片網址">
+            <Input
+              value={imageUrl}
+              onChange={(e) => setImageUrl(e.target.value)}
+              placeholder="輸入圖片網址"
+            />
+          </Form.Item>
+
+          <Form.Item label="圖片大小">
+            <Radio.Group
+              value={imageSize}
+              onChange={(e) => setImageSize(e.target.value)}
+            >
+              <Radio value="large">大（800px）</Radio>
+              <Radio value="medium">中（500px）</Radio>
+              <Radio value="small">小（300px）</Radio>
+              <Radio value="custom">自定義</Radio>
+            </Radio.Group>
+          </Form.Item>
+        </Form>
+      </Modal>
     </div>
   );
 };

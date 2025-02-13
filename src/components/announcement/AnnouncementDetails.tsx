@@ -9,9 +9,11 @@ const AnnouncementDetails: React.FC = () => {
   const [announcement, setAnnouncement] = useState<Announcement | null>(null);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+
   const formatDate = (dateString: string): string => {
     return moment(dateString).format("YYYY-MM-DD");
   };
+
   useEffect(() => {
     const loadAnnouncement = async () => {
       try {
@@ -77,7 +79,9 @@ const AnnouncementDetails: React.FC = () => {
 
         {/* 公告內容 */}
         <div className="content">
-          <p>{announcement?.content}</p>
+          {announcement?.content.split("|").map((line, index) => (
+            <p key={index}>{line}</p>
+          ))}
         </div>
 
         <hr />

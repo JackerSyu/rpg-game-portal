@@ -14,6 +14,7 @@ import DailyMission from "./components/guide/DailyMission";
 import AdvertisingReward from "./components/guide/AdvertisingReward";
 import Disclaimer from "./components/disclaim/Disclaimer";
 import ChristmasEvent from "./components/guide/ChristmasEvent";
+import LunarNewYearEvent from "./components/guide/LunarNewYearEvent";
 import PlayerGuidelines from "./components/guidelines/PlayerGuidelines";
 import BeginnerGuide from "./components/guide/BeginnerGuide";
 import Register from "./components/account/Register";
@@ -53,6 +54,7 @@ const AppRouter: React.FC = () => {
       <Route path="/guide/beginner" element={<BeginnerGuide />} />
       <Route path="/disclaimer" element={<Disclaimer />} />
       <Route path="/event/christmas" element={<ChristmasEvent />} />
+      <Route path="/event/newyear" element={<LunarNewYearEvent />} />
       <Route path="/player-guidelines" element={<PlayerGuidelines />} />
 
       {/* 新增論壇相關路由 */}
